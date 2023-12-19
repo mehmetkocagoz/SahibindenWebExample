@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- NAVBAR SECTION -->
+<nav class="navbar navbar-expand-lg custom-style-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand custom-style-logo mx-5 px-1" href="/">sahibinden.com</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="d-flex m-auto" role="search" id="searchForm" action="/" method="GET">
+          <input class="form-control me-2 custom-style-input" type="search" name="search_query" placeholder="Kelime, ilan no veya mağaza adı ile ara" aria-label="Search"  style="width: 320px;">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+</nav>
+  <!-- NAVBAR SECTION -->
+
+    {% block content %}{% endblock %}
+  
