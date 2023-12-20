@@ -12,7 +12,7 @@
     {% block content %}
     <div class="detail-main-container">
         <div class="detail-title">
-           <h1>{{ detail_data.Açıklama }}</h1>
+           <h1>{{ detail_data.Başlık }}</h1>
         </div>
         <hr>
         <div class="detail-content-with-image">
@@ -24,7 +24,7 @@
                 <p class="city">{{ detail_data.Şehir}}</p>
                 <hr>
                 <ul>{% for key, value in detail_data.items() %}
-                    {% if key != 'Açıklama' %}
+                    {% if key != 'Açıklama' and key != 'Başlık' and key != 'Fiyat' and key != 'Şehir' %}
                     <li><strong>{{ key }}</strong> <p class="{% if key == 'İlan No' %}AddNo{% endif %}">{{ value }}</p></li>
                     {% endif %}
                     {% endfor %}
