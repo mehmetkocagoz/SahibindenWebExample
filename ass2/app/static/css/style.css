@@ -31,8 +31,13 @@
 
 /* category list styling  */
 .category{
-    padding: 2rem;
-    width: 25%;
+    margin: 2rem;
+    width: 20%;
+    border: 0.1rem solid gray;
+}
+
+.category nav{
+    padding-left: 1rem;
 }
 
 nav ul{
@@ -207,7 +212,7 @@ li a{
         margin-left: 15%;
     }
     .category{
-        width: 30%;
+        width: 25%;
     }
 }
 
@@ -216,25 +221,28 @@ li a{
         width: 70%;
         margin-left: 15%;
     }
+
+    .main-frame-title a{
+        display: none;
+    }
+
+    .main-frame .main-frame-title{
+        justify-content: center;
+        height: 3rem;
+    }
 }
 
 
 @media screen and (max-width:850px) {
     .main-container{
-        width: 80%;
-        margin-left: 10%;
+        width: 90%;
+        margin-left: 5%;
     }
 
     .category{
         font-size: 0.8rem;
     }
-    .main-frame-title a{
-        display: none;
-    }
-    .main-frame .main-frame-title{
-        justify-content: center;
-        height: 3rem;
-    }
+    
     .content img{
         width: 100px;
         height: 60px;
@@ -265,10 +273,6 @@ li a{
 }
 
 @media screen and (max-width:665px){
-    .main-container{
-        width: 90%;
-        margin-left: 5%;
-    }
 
     .category{
         font-size: 0.7rem;
