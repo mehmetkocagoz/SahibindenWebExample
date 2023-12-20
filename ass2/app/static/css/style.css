@@ -168,6 +168,10 @@ li a{
     
 }
 
+.detail-content ul li p{
+    width: 20%;
+}
+
 .detail-content .AddNo{
     color: red;
 }
