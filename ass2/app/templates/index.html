@@ -53,9 +53,9 @@
                 <ul class="flex-container">{% for data in all_data %}
                     <li class="flex-item">
                         <div class="content">
-                            <a href="/detail?title={{ data['description'] }}">
+                            <a href="/detail?title={{ data['title'] }}">
                                 <img src="{{ data['image'] }}" alt="">
-                                <p>{{ data['description'] }}</p>
+                                <p>{{ data['title'] }}</p>
                             </a>
                         </div>
                     </li>
