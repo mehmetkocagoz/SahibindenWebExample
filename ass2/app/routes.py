@@ -117,7 +117,7 @@ def get_data_by_attribute(attribute):
 
     # Fetch data from the 'VEHICLE' table
     vehicle_query = ('''
-                    SELECT description,data
+                    SELECT title,data
                     FROM VEHICLE
                     WHERE category LIKE ?
                     OR brand LIKE ?
@@ -129,7 +129,7 @@ def get_data_by_attribute(attribute):
     vehicle_result = cursor.fetchall()
 
     house_query = ('''
-                   SELECT description,data
+                   SELECT title,data
                    FROM HOUSE
                    WHERE category LIKE ?
                    OR city LIKE ?;
@@ -140,7 +140,7 @@ def get_data_by_attribute(attribute):
     house_result = cursor.fetchall()
 
     lecturer_query = ('''
-                      SELECT description,data
+                      SELECT title,data
                       FROM LECTURER
                       WHERE category LIKE ?
                       OR city LIKE ?  
@@ -154,7 +154,7 @@ def get_data_by_attribute(attribute):
     data_given_attributes = []
 
     for row in all_data:
-        description = row[0]
+        title = row[0]
         image =  row[1]
 
         base64_image = base64.b64encode(image).decode('utf-8')
@@ -163,7 +163,7 @@ def get_data_by_attribute(attribute):
         data_url = f'data:{mime_type};base64,{base64_image}'
 
         all_data_dict = {
-            'description' : description,
+            'title' : title,
             'image' : data_url
         }
         data_given_attributes.append(all_data_dict)
@@ -205,9 +205,9 @@ def detail_ads():
     cursor = connection.cursor()
     
     # Check VEHICLE table
-    vehicle_query = ("SELECT * FROM VEHICLE WHERE description = ?;")
-    house_query = ("SELECT * FROM HOUSE WHERE description = ?;")
-    lecturer_query = ("SELECT * FROM LECTURER WHERE description = ?;")
+    vehicle_query = ("SELECT * FROM VEHICLE WHERE title = ?;")
+    house_query = ("SELECT * FROM HOUSE WHERE title = ?;")
+    lecturer_query = ("SELECT * FROM LECTURER WHERE title = ?;")
     cursor.execute(vehicle_query, (ad_title,))
 
     vehicle_result = cursor.fetchone()
@@ -220,37 +220,45 @@ def detail_ads():
             cursor.execute(lecturer_query,(ad_title,))
             lecturer_result = cursor.fetchone()
 
-            image = lecturer_result[6]
+            image = lecturer_result[9]
             base64_image = base64.b64encode(image).decode('utf-8')
             # Ensure the correct MIME type based on your image format (image/jpeg)
             mime_type = 'image/jpeg'
             data_url = f'data:{mime_type};base64,{base64_image}'
             data = {
-                'Ders' : lecturer_result[1],
+                'Kategori' : lecturer_result[1],
                 'İlan No' : lecturer_result[2],
                 'Şehir' : lecturer_result[3],
-                'Fiyat' : lecturer_result[4],
-                'Açıklama' : lecturer_result[5],
+                'Eğitim' : lecturer_result[4],
+                'Ders Yeri' : lecturer_result[5],
+                'Fiyat' : lecturer_result[6],
+                'Açıklama' : lecturer_result[7],
+                'Başlık' : lecturer_result[8]
             }
             return render_template('detail.html',detail_data = data,image=data_url)
 
         else:
-            image = house_result[6]
+            image = house_result[11]
             base64_image = base64.b64encode(image).decode('utf-8')
             mime_type = 'image/jpeg'
             data_url = f'data:{mime_type};base64,{base64_image}'
             data = {
                 'Kategori' : house_result[1],
                 'İlan No' : house_result[2],
-                'Şehir' : house_result[3],
-                'Fiyat' : house_result[4],
-                'Açıklama' : house_result[5]
+                'Oda Sayısı' : house_result[3],
+                'm2' : house_result[4],
+                'Asansör' : house_result[5],
+                'Otopark' : house_result[6],
+                'Şehir' : house_result[7],
+                'Fiyat' : house_result[8],
+                'Açıklama' : house_result[9],
+                'Başlık' : house_result[10]
             }
 
             return render_template('detail.html',detail_data = data, image = data_url)
 
     else:
-        image = vehicle_result[8]
+        image = vehicle_result[13]
         base64_image = base64.b64encode(image).decode('utf-8')
         mime_type = 'image/jpeg'
         data_url = f'data:{mime_type};base64,{base64_image}'
@@ -259,9 +267,14 @@ def detail_ads():
             'İlan No' : vehicle_result[2],
             'Marka' : vehicle_result[3],
             'Model' : vehicle_result[4],
-            'Şehir' : vehicle_result[5],
-            'Fiyat' : vehicle_result[6],
-            'Açıklama' : vehicle_result[7]
-        }
+            'Yıl' : vehicle_result[5],
+            'Km' : vehicle_result[6],
+            'Motor Gücü' : vehicle_result[7],
+            'Vites' : vehicle_result[8],
+            'Şehir' : vehicle_result[9],
+            'Fiyat' : vehicle_result[10],
+            'Açıklama' : vehicle_result[11],
+            'Başlık' : vehicle_result[12]
+        } 
 
     return render_template('detail.html', detail_data = data, image = data_url)
