@@ -80,13 +80,13 @@ def get_all_data():
     cursor = connection.cursor()
 
     # Fetch data from the 'VEHICLE' table
-    cursor.execute("SELECT title,data FROM VEHICLE;")
+    cursor.execute("SELECT title,data,adNo FROM VEHICLE;")
     all_data = cursor.fetchall()
 
-    cursor.execute("SELECT title, data FROM HOUSE;")
+    cursor.execute("SELECT title, data,adNo FROM HOUSE;")
     house_data = cursor.fetchall()
 
-    cursor.execute("SELECT title, data from LECTURER;")
+    cursor.execute("SELECT title, data,adNo from LECTURER;")
     lecturer_data = cursor.fetchall()
     all_data = all_data + house_data + lecturer_data
 
@@ -94,7 +94,7 @@ def get_all_data():
     for row in all_data:
         title = row[0]
         image =  row[1]
-
+        adNo = row[2]
         base64_image = base64.b64encode(image).decode('utf-8')
         # Ensure the correct MIME type based on your image format (e.g., image/jpeg)
         mime_type = 'image/jpeg'
@@ -102,7 +102,8 @@ def get_all_data():
 
         all_data_dict = {
             'title' : title,
-            'image' : data_url
+            'image' : data_url,
+            'adNo' : adNo
         }
         all_data_info.append(all_data_dict)
 
@@ -198,16 +199,16 @@ def homesql():
     
 @app.route('/detail')
 def detail_ads():
-    ad_title = request.args.get('title')
+    ad_title = request.args.get('adNo')
     # Since I have three different tables
     # First I should find which table responsible
     connection = sqlite3.connect("table.sqlite")
     cursor = connection.cursor()
-    
+
     # Check VEHICLE table
-    vehicle_query = ("SELECT * FROM VEHICLE WHERE title = ?;")
-    house_query = ("SELECT * FROM HOUSE WHERE title = ?;")
-    lecturer_query = ("SELECT * FROM LECTURER WHERE title = ?;")
+    vehicle_query = ("SELECT * FROM VEHICLE WHERE adNo = ?;")
+    house_query = ("SELECT * FROM HOUSE WHERE adNo = ?;")
+    lecturer_query = ("SELECT * FROM LECTURER WHERE adNo = ?;")
     cursor.execute(vehicle_query, (ad_title,))
 
     vehicle_result = cursor.fetchone()
@@ -275,6 +276,6 @@ def detail_ads():
             'Fiyat' : vehicle_result[10],
             'Açıklama' : vehicle_result[11],
             'Başlık' : vehicle_result[12]
-        } 
+        }
 
     return render_template('detail.html', detail_data = data, image = data_url)
