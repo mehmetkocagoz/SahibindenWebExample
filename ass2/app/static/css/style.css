@@ -117,7 +117,6 @@ li a{
     margin-left: 20%;
     width: 60%;
     display: block;
-    height: 400px;
 }
 
 .detail-title h1{
@@ -133,6 +132,7 @@ li a{
     flex: 0 0 60%;
     height: 100%;
     text-align: center;
+    height: 400px;
 }
 
 .detail-image img{
@@ -180,6 +180,24 @@ li a{
     margin-top: 2rem;
     border: 1px solid gray;
     padding-left: 2rem;
+}
+
+.detail-content-description{
+    margin-top: 1rem;   
+    border: 0.1rem solid gray;
+    height: 150px;
+}
+
+.detail-content-description p{
+    padding: 0.5rem 0rem 0rem 1rem;
+}
+
+.detail-content-description-title{
+    text-align: center;
+}
+
+.detail-content-description-title h3{
+    font-size: 20px;
 }
 
 /* MEDIA QUERIES */
