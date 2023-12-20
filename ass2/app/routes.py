@@ -80,19 +80,19 @@ def get_all_data():
     cursor = connection.cursor()
 
     # Fetch data from the 'VEHICLE' table
-    cursor.execute("SELECT description,data FROM VEHICLE;")
+    cursor.execute("SELECT title,data FROM VEHICLE;")
     all_data = cursor.fetchall()
 
-    cursor.execute("SELECT description, data FROM HOUSE;")
+    cursor.execute("SELECT title, data FROM HOUSE;")
     house_data = cursor.fetchall()
 
-    cursor.execute("SELECT description, data from LECTURER;")
+    cursor.execute("SELECT title, data from LECTURER;")
     lecturer_data = cursor.fetchall()
     all_data = all_data + house_data + lecturer_data
 
     all_data_info=[]
     for row in all_data:
-        description = row[0]
+        title = row[0]
         image =  row[1]
 
         base64_image = base64.b64encode(image).decode('utf-8')
@@ -101,7 +101,7 @@ def get_all_data():
         data_url = f'data:{mime_type};base64,{base64_image}'
 
         all_data_dict = {
-            'description' : description,
+            'title' : title,
             'image' : data_url
         }
         all_data_info.append(all_data_dict)
