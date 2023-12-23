@@ -123,9 +123,11 @@ def get_data_by_attribute(attribute):
                     WHERE category LIKE ?
                     OR brand LIKE ?
                     OR model LIKE ?
-                    OR city LIKE ?;
+                    OR city LIKE ?
+                    OR year LIKE ?
+                    OR vites LIKE ?;
                    ''')
-    cursor.execute(vehicle_query,('%' + attribute + '%', '%' + attribute + '%', '%' + attribute + '%','%' + attribute + '%'))
+    cursor.execute(vehicle_query,('%' + attribute + '%', '%' + attribute + '%', '%' + attribute + '%','%' + attribute + '%','%' + attribute + '%','%' + attribute + '%'))
 
     vehicle_result = cursor.fetchall()
 
